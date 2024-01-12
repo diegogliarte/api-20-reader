@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.Api20_Detector" parent="Theme.AppCompat.Light.NoActionBar" >
+        <item name="android:statusBarColor">@color/primary_4</item>
+        <item name="android:navigationBarColor">@color/primary_0</item>
+    </style>
+
+    <style name="Theme.Api20_Detector.Camera" parent="Theme.AppCompat.Light.NoActionBar" >
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+</resources>
