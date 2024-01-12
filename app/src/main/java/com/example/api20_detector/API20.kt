@@ -14,8 +14,17 @@ class API20Instance(val name: String, val microtubes: Map<Int, Microtube>) {
 
 
 object API20Factory {
-    private val instances = mapOf(
-        "API20E" to API20Instance(
+    fun getInstance(name: String): API20Instance? {
+        return when (name) {
+            "API20E" -> createAPI20EInstance()
+            // Add other instances here if needed
+            else -> null
+        }
+    }
+
+
+    private fun createAPI20EInstance(): API20Instance {
+        return API20Instance(
             "API20E",
             mapOf(
                 1 to Microtube(1, listOf(MicrotubeColor.YELLOW), listOf(MicrotubeColor.WHITE)),
@@ -30,21 +39,54 @@ object API20Factory {
                 10 to Microtube(10, listOf(MicrotubeColor.BEIGE), listOf(MicrotubeColor.WHITE)),
 
                 11 to Microtube(11, listOf(MicrotubeColor.BLACK), listOf(MicrotubeColor.WHITE)),
-                12 to Microtube(12, listOf(MicrotubeColor.YELLOW), listOf(MicrotubeColor.BLUE, MicrotubeColor.GREEN)),
-                13 to Microtube(13, listOf(MicrotubeColor.YELLOW), listOf(MicrotubeColor.BLUE, MicrotubeColor.GREEN)),
-                14 to Microtube(14, listOf(MicrotubeColor.YELLOW), listOf(MicrotubeColor.BLUE, MicrotubeColor.GREEN)),
-                15 to Microtube(15, listOf(MicrotubeColor.YELLOW), listOf(MicrotubeColor.BLUE, MicrotubeColor.GREEN)),
-                16 to Microtube(16, listOf(MicrotubeColor.YELLOW), listOf(MicrotubeColor.BLUE, MicrotubeColor.GREEN)),
-                17 to Microtube(17, listOf(MicrotubeColor.YELLOW), listOf(MicrotubeColor.BLUE, MicrotubeColor.GREEN)),
-                18 to Microtube(18, listOf(MicrotubeColor.YELLOW), listOf(MicrotubeColor.BLUE, MicrotubeColor.GREEN)),
-                19 to Microtube(19, listOf(MicrotubeColor.YELLOW), listOf(MicrotubeColor.BLUE, MicrotubeColor.GREEN)),
-                20 to Microtube(20, listOf(MicrotubeColor.YELLOW), listOf(MicrotubeColor.BLUE, MicrotubeColor.GREEN)),
+                12 to Microtube(
+                    12,
+                    listOf(MicrotubeColor.YELLOW),
+                    listOf(MicrotubeColor.BLUE, MicrotubeColor.GREEN)
+                ),
+                13 to Microtube(
+                    13,
+                    listOf(MicrotubeColor.YELLOW),
+                    listOf(MicrotubeColor.BLUE, MicrotubeColor.GREEN)
+                ),
+                14 to Microtube(
+                    14,
+                    listOf(MicrotubeColor.YELLOW),
+                    listOf(MicrotubeColor.BLUE, MicrotubeColor.GREEN)
+                ),
+                15 to Microtube(
+                    15,
+                    listOf(MicrotubeColor.YELLOW),
+                    listOf(MicrotubeColor.BLUE, MicrotubeColor.GREEN)
+                ),
+                16 to Microtube(
+                    16,
+                    listOf(MicrotubeColor.YELLOW),
+                    listOf(MicrotubeColor.BLUE, MicrotubeColor.GREEN)
+                ),
+                17 to Microtube(
+                    17,
+                    listOf(MicrotubeColor.YELLOW),
+                    listOf(MicrotubeColor.BLUE, MicrotubeColor.GREEN)
+                ),
+                18 to Microtube(
+                    18,
+                    listOf(MicrotubeColor.YELLOW),
+                    listOf(MicrotubeColor.BLUE, MicrotubeColor.GREEN)
+                ),
+                19 to Microtube(
+                    19,
+                    listOf(MicrotubeColor.YELLOW),
+                    listOf(MicrotubeColor.BLUE, MicrotubeColor.GREEN)
+                ),
+                20 to Microtube(
+                    20,
+                    listOf(MicrotubeColor.YELLOW),
+                    listOf(MicrotubeColor.BLUE, MicrotubeColor.GREEN)
+                ),
 
                 21 to Microtube(21, listOf(MicrotubeColor.GREEN), listOf(MicrotubeColor.RED))
             )
         )
-    )
-
-    fun getInstance(name: String): API20Instance? = instances[name]
-
+    }
 }
