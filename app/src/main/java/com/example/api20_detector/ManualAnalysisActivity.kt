@@ -103,7 +103,6 @@ class ManualAnalysisActivity : AppCompatActivity() {
 
 
     private fun updateCodeTextView() {
-        Log.d("ManualAnalysisActivity", "UPDATING CODE TEXT VIEW")
         val codeTextView = findViewById<TextView>(R.id.code)
         val code = StringBuilder()
 
@@ -112,7 +111,6 @@ class ManualAnalysisActivity : AppCompatActivity() {
             for (j in 0..2) {
                 val microtubeIndex = i + j
                 val microtube = currentInstance.microtubes[microtubeIndex]
-                Log.d("ManualAnalysisActivity", "Microtube $microtubeIndex: ${microtube?.currentColor}")
                 if (microtube?.positiveColors?.contains(microtube.currentColor) == true) {
                     sum += getNumberForMicrotube(microtubeIndex)
                 }

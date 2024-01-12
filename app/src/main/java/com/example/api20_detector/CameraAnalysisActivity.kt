@@ -21,7 +21,6 @@ class CameraAnalysisActivity : CameraActivity() {
     private val colorAnalyzer = ColorAnalyzer()
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_camera)
@@ -61,6 +60,7 @@ class CameraAnalysisActivity : CameraActivity() {
 
         intent.putStringArrayListExtra("microtubesColors", colorNames)
         startActivity(intent)
+        finish()
     }
 
 
