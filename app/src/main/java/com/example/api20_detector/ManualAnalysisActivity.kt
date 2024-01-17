@@ -50,21 +50,26 @@ class ManualAnalysisActivity : AppCompatActivity() {
     }
 
     private fun handleReceivedColors() {
-        val colorNames = intent.getStringArrayListExtra("microtubesColors") ?: listOf()
-        val colors = convertStringsToMicrotubeColors(colorNames)
-        if (colors.isNotEmpty()) {
-            fillMicrotubesWithReceivedColors(colors)
-        }
-    }
+        val microtubeNumber = intent.getIntExtra("microtubeNumber", 0)
+        for (i in 0..microtubeNumber) {
+            val colorNames = intent.getStringArrayListExtra("microtube${i}Colors") ?: continue
 
-    private fun fillMicrotubesWithReceivedColors(colors: List<MicrotubeColor>) {
-        for (i in colors.indices) {
-            updateMicrotubeView(i + 1, colors[i])
-        }
-    }
+            val microtube = currentInstance.microtubes[i + 1]
+            val allowedColors = microtube?.positiveColors.orEmpty() + microtube?.negativeColors.orEmpty()
+            val allowedColorNames = allowedColors.map { it.name }
 
-    private fun updateMicrotubeView(microtubeIndex: Int, color: MicrotubeColor) {
-        handleMicrotubeUpdate(microtubeIndex, color)
+            val bestColorName = colorNames
+                .filter { it in allowedColorNames }
+                .groupingBy { it }
+                .eachCount()
+                .maxByOrNull { it.value }?.key
+
+            val bestColor = bestColorName?.let { enumValueOf<MicrotubeColor>(it) }
+
+            if (bestColor != null) {
+                handleMicrotubeUpdate(i + 1, bestColor)
+            }
+        }
     }
 
     private fun handleMicrotubeUpdate(microtubeIndex: Int, color: MicrotubeColor? = null) {

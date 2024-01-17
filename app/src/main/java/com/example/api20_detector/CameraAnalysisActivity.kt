@@ -16,7 +16,7 @@ class CameraAnalysisActivity : CameraActivity() {
     private var cameraViewListener = CameraViewListener(drawer)
 
     private var isFirstSetAnalyzed = false
-    private val allMicrotubesColors = mutableListOf<MicrotubeColor>()
+    private val allMicrotubesColors = mutableListOf<List<MicrotubeColor>>()
 
     private val colorAnalyzer = ColorAnalyzer()
 
@@ -56,9 +56,14 @@ class CameraAnalysisActivity : CameraActivity() {
 
     private fun showAllMicrotubesColors() {
         val intent = Intent(this, ManualAnalysisActivity::class.java)
-        val colorNames = ArrayList(allMicrotubesColors.map { it.name })
 
-        intent.putStringArrayListExtra("microtubesColors", colorNames)
+        allMicrotubesColors.forEachIndexed { index, microtubeColors  ->
+            val colorStrings = ArrayList(microtubeColors.map { it.toString() })
+            intent.putStringArrayListExtra("microtube${index}Colors", colorStrings)
+        }
+
+        intent.putExtra("microtubeNumber", allMicrotubesColors.size)
+
         startActivity(intent)
         finish()
     }
