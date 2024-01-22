@@ -8,13 +8,13 @@ class CameraViewListener(private val drawer: Drawer) : CameraBridgeViewBase.CvCa
     @Volatile private var frameForAnalysis: Mat? = null
 
     fun getLatestFrame(): Mat? = synchronized(this) {
-        return latestFrame?.clone()
+        return latestFrame
     }
 
     fun setFrameForAnalysis(frame: Mat?) {
         synchronized(this) {
             frameForAnalysis?.release()
-            frameForAnalysis = frame?.clone()
+            frameForAnalysis = frame
         }
     }
 
@@ -40,9 +40,10 @@ class CameraViewListener(private val drawer: Drawer) : CameraBridgeViewBase.CvCa
                 return drawer.draw(frame)
             }
 
+            val rgbaFrame = inputFrame.rgba()
             latestFrame?.release()
-            latestFrame = inputFrame.rgba()
-            return drawer.draw(latestFrame!!.clone())
+            latestFrame = rgbaFrame
+            return drawer.draw(rgbaFrame.clone())
         }
     }
 }

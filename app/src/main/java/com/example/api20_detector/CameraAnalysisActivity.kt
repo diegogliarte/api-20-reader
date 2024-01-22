@@ -70,9 +70,9 @@ class CameraAnalysisActivity : CameraActivity() {
         cameraViewListener.getLatestFrame()?.let { frame ->
             val frameForAnalysis = cameraViewListener.getFrameForAnalysis()
             when {
-                !isAnalysing -> startAnalysis(frame)
-                !isFirstSetAnalyzed -> frameForAnalysis?.let { finishFirstAnalysis(it) }
-                else -> frameForAnalysis?.let { finishAnalysis(it) }
+                !isAnalysing -> startAnalysis(frame.clone())
+                !isFirstSetAnalyzed -> frameForAnalysis?.let { finishFirstAnalysis(it.clone()) }
+                else -> frameForAnalysis?.let { finishAnalysis(it.clone()) }
             }
         }
     }
@@ -144,7 +144,7 @@ class CameraAnalysisActivity : CameraActivity() {
     override fun onTouchEvent(event: MotionEvent): Boolean {
         scaleGestureDetector.onTouchEvent(event)
         gestureDetector.onTouchEvent(event)
-        val frame = cameraViewListener.getLatestFrame()
+
         if (event.pointerCount == 2) {
             when (event.actionMasked) {
                 MotionEvent.ACTION_POINTER_DOWN -> {
@@ -159,6 +159,7 @@ class CameraAnalysisActivity : CameraActivity() {
             }
         }
 
+        val frame = cameraViewListener.getLatestFrame()
         if (isAnalysing && frame != null) {
             applyTransformations(frame)
         }
