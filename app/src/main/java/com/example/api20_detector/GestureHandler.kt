@@ -1,5 +1,4 @@
 import android.content.Context
-import android.util.Log
 import android.view.GestureDetector
 import android.view.GestureDetector.SimpleOnGestureListener
 import android.view.MotionEvent
@@ -47,16 +46,9 @@ class GestureHandler(
             }
         }
 
-        Log.d("TEST", "11111111111111")
         val frame = cameraViewListener.getLatestFrame()
-        Log.d("TEST", "222222222222222")
         if (isAnalysing && frame != null) {
-            Log.d("TEST", "33333333333333")
-            Log.d("TEST", frame.width().toString())
-            Log.d("TEST", frame.height().toString())
             applyTransformations(frame)
-
-
         }
     }
 
@@ -102,10 +94,10 @@ class GestureHandler(
         translationMatrix.put(1, 0, 0.0, 1.0, translateY.toDouble())
 
         // Translate the frame
-        val translatedFrame = Mat()
+        val translatedMatrix = Mat()
         Imgproc.warpAffine(
             frame,
-            translatedFrame,
+            translatedMatrix,
             translationMatrix,
             frame.size()
         )
@@ -118,15 +110,20 @@ class GestureHandler(
         )
 
         // Apply rotation and scaling
-        val transformedFrame = Mat()
+        val transformedMatrix = Mat()
         Imgproc.warpAffine(
-            translatedFrame,
-            transformedFrame,
+            translatedMatrix,
+            transformedMatrix,
             rotationMatrix,
             frame.size()
         )
 
-        cameraViewListener.setFrameForAnalysis(transformedFrame)
+        cameraViewListener.setFrameForAnalysis(transformedMatrix)
+
+        translationMatrix.release()
+        translatedMatrix.release()
+        transformedMatrix.release()
+        rotationMatrix.release()
     }
 
     fun setIsAnalysing(isAnalysing: Boolean) {

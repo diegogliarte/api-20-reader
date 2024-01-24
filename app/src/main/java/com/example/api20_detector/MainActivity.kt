@@ -13,6 +13,7 @@ class MainActivity : AppCompatActivity() {
 
         val cameraModeContainer = findViewById<LinearLayout>(R.id.cameraModeSelector)
         val manualModeContainer = findViewById<LinearLayout>(R.id.manualModeSelector)
+        val historyContainer = findViewById<LinearLayout>(R.id.historySelector)
 
 
         cameraModeContainer.setOnClickListener {
@@ -22,6 +23,11 @@ class MainActivity : AppCompatActivity() {
 
         manualModeContainer.setOnClickListener {
             val intent = Intent(this, ManualAnalysisActivity::class.java)
+            startActivity(intent)
+        }
+
+        historyContainer.setOnClickListener {
+            val intent = Intent(this, HistoryActivity::class.java)
             startActivity(intent)
         }
 

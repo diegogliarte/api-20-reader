@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:background="@color/primary_0"
     android:gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
     <Toolbar
         android:id="@+id/toolbar"
@@ -28,6 +29,7 @@
 
 
     <ScrollView
+        android:id="@+id/mainLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -645,8 +647,37 @@
                 android:textColor="@color/primary_0"
                 android:textSize="32sp" />
 
+
+            <EditText
+                android:id="@+id/titleInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Title"
+                android:nextFocusDown="@+id/notesInput"
+                android:backgroundTint="@color/primary_2"
+                />
+
+            <EditText
+                android:id="@+id/notesInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Notes"
+                android:nextFocusDown="@+id/saveButton"
+                android:backgroundTint="@color/primary_2"
+                />
+
+            <Button
+                android:id="@+id/saveButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="saveHistory"
+                android:text="Save History"
+                android:layout_gravity="center"
+                android:textColor="@color/primary_4"
+                android:background="@drawable/rounded_green_container_with_white_border_container"
+                android:padding="12dp"
+                android:layout_margin="16dp"
+                />
         </LinearLayout>
-
-
     </ScrollView>
 </LinearLayout>

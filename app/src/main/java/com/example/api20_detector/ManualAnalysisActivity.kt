@@ -5,17 +5,27 @@ import MicrotubeAnalysis
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlin.math.log
 
 class ManualAnalysisActivity : AppCompatActivity() {
     private lateinit var analysis: MicrotubeAnalysis
     private lateinit var currentInstance: API20Instance
     private val microtubeIndexMap = mutableMapOf<Int, Int>()
+    private lateinit var analysisHistoryManager: AnalysisHistoryManager
+
+    private lateinit var titleInput: EditText
+    private lateinit var notesInput: EditText
+    private lateinit var codeTextView: TextView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,7 +40,19 @@ class ManualAnalysisActivity : AppCompatActivity() {
         toolbar.setNavigationOnClickListener {
             finish()
         }
+
+        analysisHistoryManager = AnalysisHistoryManager.getInstance(this)
+        titleInput = findViewById(R.id.titleInput)
+        notesInput = findViewById(R.id.notesInput)
+        codeTextView = findViewById(R.id.code)
+
+        val mainLayout = findViewById<View>(R.id.mainLayout)
+        mainLayout.setOnTouchListener { _, _ ->
+            hideSoftKeyboard()
+            false
+        }
     }
+
 
     private fun initializeMicrotubeIndexMap() {
         for (i in 1..21) {
@@ -95,14 +117,13 @@ class ManualAnalysisActivity : AppCompatActivity() {
         updateCodeTextView()
     }
 
+    fun saveHistory(view: View) {
+        val title = titleInput.text.toString()
+        val notes = notesInput.text.toString()
+        val code = codeTextView.text.toString()
 
-    private fun convertStringsToMicrotubeColors(colorNames: List<String>): List<MicrotubeColor> {
-        return colorNames.mapNotNull { colorName ->
-            try {
-                MicrotubeColor.valueOf(colorName)
-            } catch (e: IllegalArgumentException) {
-                null
-            }
+        CoroutineScope(Dispatchers.IO).launch {
+            analysisHistoryManager.saveAnalysisHistory(title, notes, code)
         }
     }
 
@@ -138,5 +159,13 @@ class ManualAnalysisActivity : AppCompatActivity() {
     fun onMicrotubeClick(view: View) {
         val microtubeIndex = microtubeIndexMap[view.id] ?: return
         handleMicrotubeUpdate(microtubeIndex)
+    }
+
+    private fun hideSoftKeyboard() {
+        val inputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+        currentFocus?.let {
+            inputMethodManager.hideSoftInputFromWindow(it.windowToken, 0)
+            it.clearFocus()
+        }
     }
 }

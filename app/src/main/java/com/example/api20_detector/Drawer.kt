@@ -55,11 +55,6 @@ class Drawer {
         return frame
     }
 
-    private fun createOverlayMask(frame: Mat, color: Scalar = Scalar(50.0, 50.0, 50.0, 100.0)): Mat {
-        val mask = Mat(frame.size(), frame.type(), color)
-        return mask
-    }
-
     private fun cutTransparentHoles(mask: Mat, regions: List<Pair<Point, Point>>) {
         val transparent = Scalar(0.0, 0.0, 0.0, 0.0)
 1
