@@ -35,7 +35,7 @@ object API20Factory {
                 6 to Microtube(6, listOf(MicrotubeColor.BLACK), listOf(MicrotubeColor.YELLOW)),
                 7 to Microtube(7, listOf(MicrotubeColor.PINK), listOf(MicrotubeColor.YELLOW)),
                 8 to Microtube(8, listOf(MicrotubeColor.BROWN), listOf(MicrotubeColor.YELLOW)),
-                9 to Microtube(9, listOf(MicrotubeColor.ORANGE), listOf(MicrotubeColor.YELLOW)),
+                9 to Microtube(9, listOf(MicrotubeColor.PINK), listOf(MicrotubeColor.YELLOW)),
                 10 to Microtube(10, listOf(MicrotubeColor.BEIGE), listOf(MicrotubeColor.WHITE)),
 
                 11 to Microtube(11, listOf(MicrotubeColor.BLACK), listOf(MicrotubeColor.WHITE)),

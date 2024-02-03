@@ -1,5 +1,6 @@
 package com.example.api20_detector
 
+import android.util.Log
 import org.opencv.core.Core
 import org.opencv.core.Mat
 import org.opencv.core.Point
@@ -34,10 +35,10 @@ class ColorAnalyzer {
             MicrotubeColor.GREEN to ColorBounds(Scalar(45.0, 100.0, 100.0), Scalar(75.0, 255.0, 255.0)),
             MicrotubeColor.BLUE to ColorBounds(Scalar(100.0, 100.0, 100.0), Scalar(130.0, 255.0, 255.0)),
             MicrotubeColor.YELLOW to ColorBounds(Scalar(15.0, 45.0, 14.0), Scalar(27.0, 255.0, 245.0)),
-            MicrotubeColor.ORANGE to ColorBounds(Scalar(10.0, 100.0, 100.0), Scalar(20.0, 255.0, 255.0)),
-            MicrotubeColor.BLACK to ColorBounds(Scalar(0.0, 0.0, 0.0), Scalar(180.0, 255.0, 50.0)),
-            MicrotubeColor.PINK to ColorBounds(Scalar(140.0, 100.0, 100.0), Scalar(170.0, 255.0, 255.0)),
-            MicrotubeColor.BROWN to ColorBounds(Scalar(0.0, 100.0, 100.0), Scalar(10.0, 255.0, 255.0)),
+            MicrotubeColor.ORANGE to ColorBounds(Scalar(0.0, 111.0, 173.0), Scalar(20.0, 240.0, 255.0)),
+            MicrotubeColor.BLACK to ColorBounds(Scalar(0.0, 0.0, 0.0), Scalar(255.0, 255.0, 75.0)),
+            MicrotubeColor.PINK to ColorBounds(Scalar(161.0, 73.0, 131.0), Scalar(179.0, 255.0, 255.0)),
+            MicrotubeColor.BROWN to ColorBounds(Scalar(0.0, 102.0, 17.0), Scalar(179.0, 196.0, 73.0)),
             MicrotubeColor.BEIGE to ColorBounds(Scalar(0.0, 0.0, 200.0), Scalar(180.0, 50.0, 255.0)),
             MicrotubeColor.WHITE to ColorBounds(Scalar(0.0, 0.0, 200.0), Scalar(180.0, 50.0, 255.0)),
         )

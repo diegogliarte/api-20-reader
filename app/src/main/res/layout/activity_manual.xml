@@ -674,7 +674,7 @@
                 android:text="Save History"
                 android:layout_gravity="center"
                 android:textColor="@color/primary_4"
-                android:background="@drawable/rounded_green_container_with_white_border_container"
+                android:background="@drawable/rounded_green_container_with_green_border_container"
                 android:padding="12dp"
                 android:layout_margin="16dp"
                 />

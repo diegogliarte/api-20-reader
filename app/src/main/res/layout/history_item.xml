@@ -1,27 +1,46 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:layout_margin="16dp"
+    android:background="@drawable/rounded_white_container_with_green_border_container">
+
+    <Button
+        android:id="@+id/delete_button"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:background="@drawable/back_arrow"
+        android:backgroundTint="@color/red"
+        android:scaleType="fitCenter"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="8dp"/>
 
     <TextView
         android:id="@+id/history_item_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_toStartOf="@id/delete_button"
+        android:layout_alignParentStart="true"
         android:text="Title"
-        android:textAppearance="?attr/textAppearanceListItem" />
-
-    <TextView
-        android:id="@+id/history_item_notes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Notes"
-        android:textAppearance="?attr/textAppearanceListItemSmall" />
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:textSize="24dp"
+        android:ellipsize="end"
+        android:maxLines="2" />
 
     <TextView
         android:id="@+id/history_item_code"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Code"
+        android:layout_below="@id/history_item_title"
+        android:text="0000000"
+        android:textAppearance="?attr/textAppearanceListItemSmall"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:id="@+id/history_item_notes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/history_item_code"
+        android:text="Notes"
         android:textAppearance="?attr/textAppearanceListItemSmall" />
-</LinearLayout>
+</RelativeLayout>
