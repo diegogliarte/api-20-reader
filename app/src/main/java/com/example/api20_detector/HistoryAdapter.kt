@@ -3,17 +3,19 @@ package com.example.api20_detector
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 data class HistoryItem(val title: String, val notes: String, val code: String)
 
-class HistoryAdapter(private val historyList: List<HistoryItem>) : RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
+class HistoryAdapter(private val historyList: List<HistoryItem>, val onDeleteClick: (HistoryItem) -> Unit) : RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val titleTextView: TextView = view.findViewById(R.id.history_item_title)
         val notesTextView: TextView = view.findViewById(R.id.history_item_notes)
         val codeTextView: TextView = view.findViewById(R.id.history_item_code)
+        val deleteButton: Button = itemView.findViewById(R.id.delete_button)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -27,6 +29,10 @@ class HistoryAdapter(private val historyList: List<HistoryItem>) : RecyclerView.
         holder.titleTextView.text = item.title
         holder.notesTextView.text = item.notes
         holder.codeTextView.text = item.code
+
+        holder.deleteButton.setOnClickListener {
+            onDeleteClick(item)
+        }
     }
 
     override fun getItemCount() = historyList.size

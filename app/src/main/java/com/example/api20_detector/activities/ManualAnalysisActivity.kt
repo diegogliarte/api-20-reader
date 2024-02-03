@@ -1,9 +1,8 @@
-package com.example.api20_detector
+package com.example.api20_detector.activities
 
 import API20Instance
 import MicrotubeAnalysis
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -12,10 +11,12 @@ import android.widget.TextView
 import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.example.api20_detector.AnalysisHistoryManager
+import com.example.api20_detector.MicrotubeColor
+import com.example.api20_detector.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlin.math.log
 
 class ManualAnalysisActivity : AppCompatActivity() {
     private lateinit var analysis: MicrotubeAnalysis

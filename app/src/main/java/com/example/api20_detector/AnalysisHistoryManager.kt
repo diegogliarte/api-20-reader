@@ -1,6 +1,7 @@
 package com.example.api20_detector
 
 import android.content.Context
+import android.util.Log
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
@@ -20,6 +21,24 @@ class AnalysisHistoryManager(private val context: Context) {
         context.dataStore.edit { preferences ->
             val currentHistory = preferences[PreferencesKeys.HISTORY] ?: ""
             preferences[PreferencesKeys.HISTORY] = currentHistory + historyData + ";;"
+        }
+    }
+
+    suspend fun removeAnalysisHistory(itemToRemove: HistoryItem) {
+        context.dataStore.edit { preferences ->
+            val currentHistory = preferences[PreferencesKeys.HISTORY] ?: ""
+            Log.d("AnalysisHistoryManager", currentHistory)
+            val updatedHistory = currentHistory.split(";;")
+                .filter { it.isNotEmpty() }
+                .map { it.split("|") }
+                .filterNot { historyItem ->
+                    historyItem.size == 3 &&
+                            historyItem[0] == itemToRemove.title &&
+                            historyItem[1] == itemToRemove.notes &&
+                            historyItem[2] == itemToRemove.code
+                }.joinToString(";;") { it.joinToString("|") } + ";;"
+
+            preferences[PreferencesKeys.HISTORY] = updatedHistory
         }
     }
 

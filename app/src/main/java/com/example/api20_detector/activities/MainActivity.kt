@@ -1,9 +1,10 @@
-package com.example.api20_detector
+package com.example.api20_detector.activities
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import com.example.api20_detector.R
 
 class MainActivity : AppCompatActivity() {
 

@@ -1,9 +1,13 @@
-package com.example.api20_detector
+package com.example.api20_detector.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.api20_detector.AnalysisHistoryManager
+import com.example.api20_detector.HistoryAdapter
+import com.example.api20_detector.HistoryItem
+import com.example.api20_detector.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -26,7 +30,12 @@ class HistoryActivity : AppCompatActivity() {
 
     private fun setupRecyclerView() {
         viewManager = LinearLayoutManager(this)
-        viewAdapter = HistoryAdapter(emptyList())
+        viewAdapter = HistoryAdapter(emptyList()) { historyItem ->
+            CoroutineScope(Dispatchers.IO).launch {
+                analysisHistoryManager.removeAnalysisHistory(historyItem)
+                loadHistory() // Reload history to refresh the RecyclerView
+            }
+        }
 
         recyclerView = findViewById<RecyclerView>(R.id.recycler_view).apply {
             setHasFixedSize(true)
@@ -40,11 +49,17 @@ class HistoryActivity : AppCompatActivity() {
             val history = analysisHistoryManager.getAnalysisHistory()
             val historyItems = parseHistory(history)
             withContext(Dispatchers.Main) {
-                viewAdapter = HistoryAdapter(historyItems)
+                viewAdapter = HistoryAdapter(historyItems) { historyItem ->
+                    CoroutineScope(Dispatchers.IO).launch {
+                        analysisHistoryManager.removeAnalysisHistory(historyItem)
+                        loadHistory()
+                    }
+                }
                 recyclerView.adapter = viewAdapter
             }
         }
     }
+
 
     private fun parseHistory(historyString: String): List<HistoryItem> {
         return historyString.split(";;")

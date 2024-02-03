@@ -1,4 +1,4 @@
-package com.example.api20_detector
+package com.example.api20_detector.activities
 
 import GestureHandler
 import android.content.Intent
@@ -7,6 +7,11 @@ import android.util.Log
 import android.view.MotionEvent
 import android.widget.Button
 import android.widget.TextView
+import com.example.api20_detector.CameraViewListener
+import com.example.api20_detector.ColorAnalyzer
+import com.example.api20_detector.Drawer
+import com.example.api20_detector.MicrotubeColor
+import com.example.api20_detector.R
 import org.opencv.android.CameraActivity
 import org.opencv.android.CameraBridgeViewBase
 import org.opencv.android.OpenCVLoader
