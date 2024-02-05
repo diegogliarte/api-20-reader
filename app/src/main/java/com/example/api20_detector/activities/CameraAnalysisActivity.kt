@@ -20,25 +20,32 @@ import java.util.Collections
 
 
 class CameraAnalysisActivity : CameraActivity() {
-    private var drawer = Drawer()
-    private var cameraViewListener = CameraViewListener(drawer)
-
-    private var isFirstSetAnalyzed = false
+    private val drawer = Drawer()
+    private val cameraViewListener = CameraViewListener(drawer)
     private var isAnalysing = false
     private val allMicrotubesColors = mutableListOf<List<MicrotubeColor>>()
-
     private val colorAnalyzer = ColorAnalyzer()
 
+    // Using lazy initialization to ensure views are only loaded once needed
     private val cameraBridgeViewBase by lazy { findViewById<CameraBridgeViewBase>(R.id.cameraView) }
     private val cameraButton by lazy { findViewById<Button>(R.id.cameraButton) }
     private val textView by lazy { findViewById<TextView>(R.id.numberOfMicrotubes) }
 
+    // Nullable type with late initialization
     private var gestureHandler: GestureHandler? = null
+
+    private var isFirstSetAnalyzed = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_camera)
+
+        if (OpenCVLoader.initDebug()) {
+            setupCameraView()
+        } else {
+            Log.e("CameraActivity", "Unable to load OpenCV")
+        }
 
         setupCameraView()
         cameraButton.setOnClickListener { cameraButtonListener() }
@@ -47,14 +54,10 @@ class CameraAnalysisActivity : CameraActivity() {
     }
 
     private fun setupCameraView() {
-        if (OpenCVLoader.initDebug()) {
-            cameraBridgeViewBase.apply {
-                visibility = CameraBridgeViewBase.VISIBLE
-                setCvCameraViewListener(cameraViewListener)
-                enableView()
-            }
-        } else {
-            Log.e("CameraActivity", "Unable to load OpenCV")
+        cameraBridgeViewBase.apply {
+            visibility = CameraBridgeViewBase.VISIBLE
+            setCvCameraViewListener(cameraViewListener)
+            enableView()
         }
     }
 
@@ -72,10 +75,9 @@ class CameraAnalysisActivity : CameraActivity() {
     }
 
     private fun startAnalysis(frame: Mat) {
-        cameraViewListener.setFrameForAnalysis(frame)
         isAnalysing = true
+        cameraViewListener.setFrameForAnalysis(frame)
         textView.text = "Move the image"
-        var x = 5
     }
 
     private fun finishFirstAnalysis(frame: Mat) {

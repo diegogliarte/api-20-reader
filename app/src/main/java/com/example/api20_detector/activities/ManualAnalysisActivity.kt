@@ -8,6 +8,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.TextView
+import android.widget.Toast
 import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -32,26 +33,38 @@ class ManualAnalysisActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_manual)
-        initializeMicrotubeIndexMap()
-        setupAnalysisInstance()
-        handleReceivedColors()
-        updateCodeTextView()
 
-        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        toolbarSetup()
+        initializeDependencies()
+        setupUIInteractions()
+    }
+
+    private fun toolbarSetup() {
+        val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbar.setNavigationOnClickListener {
             finish()
         }
+    }
 
+    private fun initializeDependencies() {
         analysisHistoryManager = AnalysisHistoryManager.getInstance(this)
         titleInput = findViewById(R.id.titleInput)
         notesInput = findViewById(R.id.notesInput)
         codeTextView = findViewById(R.id.code)
 
-        val mainLayout = findViewById<View>(R.id.mainLayout)
-        mainLayout.setOnTouchListener { _, _ ->
+        initializeMicrotubeIndexMap()
+        setupAnalysisInstance()
+        handleReceivedColors()
+    }
+
+    private fun setupUIInteractions() {
+        findViewById<View>(R.id.mainLayout).setOnTouchListener { _, _ ->
             hideSoftKeyboard()
             false
         }
+        updateCodeTextView()
     }
 
 
@@ -124,7 +137,16 @@ class ManualAnalysisActivity : AppCompatActivity() {
         val code = codeTextView.text.toString()
 
         CoroutineScope(Dispatchers.IO).launch {
-            analysisHistoryManager.saveAnalysisHistory(title, notes, code)
+            try {
+                analysisHistoryManager.saveAnalysisHistory(title, notes, code)
+                launch(Dispatchers.Main) {
+                    Toast.makeText(this@ManualAnalysisActivity, "History saved successfully!", Toast.LENGTH_SHORT).show()
+                }
+            } catch (e: Exception) {
+                launch(Dispatchers.Main) {
+                    Toast.makeText(this@ManualAnalysisActivity, "Failed to save history: ${e.message}", Toast.LENGTH_LONG).show()
+                }
+            }
         }
     }
 
@@ -163,10 +185,11 @@ class ManualAnalysisActivity : AppCompatActivity() {
     }
 
     private fun hideSoftKeyboard() {
-        val inputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-        currentFocus?.let {
-            inputMethodManager.hideSoftInputFromWindow(it.windowToken, 0)
-            it.clearFocus()
+        (getSystemService(INPUT_METHOD_SERVICE) as? InputMethodManager)?.let {
+            currentFocus?.let { view ->
+                it.hideSoftInputFromWindow(view.windowToken, 0)
+                view.clearFocus()
+            }
         }
     }
 }

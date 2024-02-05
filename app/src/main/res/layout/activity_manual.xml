@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primary_0"
@@ -8,24 +9,20 @@
     android:orientation="vertical"
     >
 
-    <Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:background="@color/primary_4"
         android:elevation="4dp"
-        android:navigationIcon="@drawable/back_arrow">
-
-        <TextView
-            android:id="@+id/toolbar_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Manual Analysis"
-            android:textColor="@color/primary_0"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            />
-    </Toolbar>
+        android:navigationIcon="@drawable/back_arrow"
+        android:textColor="@color/primary_0"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:title="Manual Analysis"
+        app:titleTextColor="@color/primary_0"
+        >
+    </androidx.appcompat.widget.Toolbar>
 
 
     <ScrollView

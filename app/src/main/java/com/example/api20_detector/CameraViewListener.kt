@@ -15,11 +15,7 @@ class CameraViewListener(private val drawer: Drawer) : CameraBridgeViewBase.CvCa
     fun setFrameForAnalysis(frame: Mat?) {
         synchronized(this) {
             frameForAnalysis?.release()
-            if (frame != null) {
-                frameForAnalysis = frame.clone()
-            } else {
-                frameForAnalysis = null
-            }
+            frameForAnalysis = frame?.clone()
         }
     }
 
@@ -35,6 +31,8 @@ class CameraViewListener(private val drawer: Drawer) : CameraBridgeViewBase.CvCa
         synchronized(this) {
             latestFrame?.release()
             frameForAnalysis?.release()
+            latestFrame = null
+            frameForAnalysis = null
         }
     }
 

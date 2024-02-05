@@ -16,23 +16,19 @@ class GestureHandler(
     private val cameraViewListener: CameraViewListener,
     private var isAnalysing: Boolean
 ) {
-    private val gestureDetector: GestureDetector
-    private val scaleGestureDetector: ScaleGestureDetector
+    private val gestureDetector = GestureDetector(context, GestureListener())
+    private val scaleGestureDetector = ScaleGestureDetector(context!!, ScaleListener())
+
     private var translateX = 0f
     private var translateY = 0f
     private var initialRotationAngle = 0f
     private var rotationAngle = 0f
     private var scale = 1.0
 
-    init {
-        gestureDetector = GestureDetector(context, GestureListener())
-        scaleGestureDetector = ScaleGestureDetector(context!!, ScaleListener())
-    }
-
     fun handleTouchEvent(event: MotionEvent) {
         scaleGestureDetector.onTouchEvent(event)
         gestureDetector.onTouchEvent(event)
-        if (event.pointerCount === 2) {
+        if (event.pointerCount == 2) {
             when (event.actionMasked) {
                 MotionEvent.ACTION_POINTER_DOWN -> initialRotationAngle =
                     calculateRotationAngle(event)
@@ -46,9 +42,8 @@ class GestureHandler(
             }
         }
 
-        val frame = cameraViewListener.getLatestFrame()
-        if (isAnalysing && frame != null) {
-            applyTransformations(frame)
+        cameraViewListener.getLatestFrame()?.let { frame ->
+            if (isAnalysing) applyTransformations(frame)
         }
     }
 
