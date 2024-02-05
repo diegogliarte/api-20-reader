@@ -1,6 +1,7 @@
 package com.example.api20_detector.activities
 
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -28,20 +29,25 @@ class HistoryActivity : AppCompatActivity() {
         loadHistory()
     }
 
-    private fun setupRecyclerView() {
-        viewManager = LinearLayoutManager(this)
-        viewAdapter = HistoryAdapter(emptyList()) { historyItem ->
-            CoroutineScope(Dispatchers.IO).launch {
-                analysisHistoryManager.removeAnalysisHistory(historyItem)
-                loadHistory() // Reload history to refresh the RecyclerView
-            }
+    private fun updateRecyclerViewWithHistoryItems(historyItems: List<HistoryItem>) {
+        // Define the adapter with the current history items and the deletion callback
+        viewAdapter = HistoryAdapter(historyItems) { historyItem ->
+            showDeletionConfirmationDialog(historyItem)
         }
 
+        // Set the adapter to the RecyclerView
+        recyclerView.adapter = viewAdapter
+    }
+
+    private fun setupRecyclerView() {
+        viewManager = LinearLayoutManager(this)
         recyclerView = findViewById<RecyclerView>(R.id.recycler_view).apply {
             setHasFixedSize(true)
             layoutManager = viewManager
-            adapter = viewAdapter
         }
+
+        // Initially, set an empty list or load the history right away
+        loadHistory()
     }
 
     private fun loadHistory() {
@@ -49,17 +55,26 @@ class HistoryActivity : AppCompatActivity() {
             val history = analysisHistoryManager.getAnalysisHistory()
             val historyItems = parseHistory(history)
             withContext(Dispatchers.Main) {
-                viewAdapter = HistoryAdapter(historyItems) { historyItem ->
-                    CoroutineScope(Dispatchers.IO).launch {
-                        analysisHistoryManager.removeAnalysisHistory(historyItem)
-                        loadHistory()
-                    }
-                }
-                recyclerView.adapter = viewAdapter
+                updateRecyclerViewWithHistoryItems(historyItems)
             }
         }
     }
 
+
+    private fun showDeletionConfirmationDialog(historyItem: HistoryItem) {
+        AlertDialog.Builder(this)
+            .setTitle("Delete History")
+            .setMessage("Are you sure you want to delete this history item?")
+            .setPositiveButton("Delete") { dialog, which ->
+                // Delete the item and reload history
+                CoroutineScope(Dispatchers.IO).launch {
+                    analysisHistoryManager.removeAnalysisHistory(historyItem)
+                    loadHistory() // Make sure this method correctly updates the adapter on the UI thread
+                }
+            }
+            .setNegativeButton("Cancel", null) // Dismiss dialog without action
+            .show()
+    }
 
     private fun parseHistory(historyString: String): List<HistoryItem> {
         return historyString.split(";;")
