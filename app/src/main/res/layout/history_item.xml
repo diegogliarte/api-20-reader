@@ -43,4 +43,14 @@
         android:layout_below="@id/history_item_code"
         android:text="Notes"
         android:textAppearance="?attr/textAppearanceListItemSmall" />
+
+    <TextView
+        android:id="@+id/history_item_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/history_item_notes"
+        android:text="Date"
+        android:textAppearance="?attr/textAppearanceListItemSmall"
+        />
+
 </RelativeLayout>

@@ -66,7 +66,7 @@ class HistoryActivity : AppCompatActivity() {
             .filter { it.isNotEmpty() }
             .map { historyItem ->
                 val parts = historyItem.split("|")
-                HistoryItem(parts[0], parts[1], parts[2])
+                HistoryItem(parts[0], parts[1], parts[2], parts[3])
             }
     }
 }

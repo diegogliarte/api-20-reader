@@ -8,6 +8,11 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.Calendar
+import java.util.Locale
 
 class AnalysisHistoryManager(private val context: Context) {
     private val Context.dataStore by preferencesDataStore(name = "analysis_history")
@@ -17,7 +22,14 @@ class AnalysisHistoryManager(private val context: Context) {
     }
 
     suspend fun saveAnalysisHistory(title: String, notes: String, code: String) {
-        val historyData = "$title|$notes|$code"
+        // Format the current date and time for lower API levels
+        val calendar = Calendar.getInstance()
+        val formatter = SimpleDateFormat("yyyy/MM/dd HH:mm", Locale.getDefault())
+        val formattedDateTime = formatter.format(calendar.time)
+
+        // Construct historyData with date appended
+        val historyData = "$title|$notes|$code|$formattedDateTime"
+
         context.dataStore.edit { preferences ->
             val currentHistory = preferences[PreferencesKeys.HISTORY] ?: ""
             preferences[PreferencesKeys.HISTORY] = currentHistory + historyData + ";;"
@@ -32,10 +44,10 @@ class AnalysisHistoryManager(private val context: Context) {
                 .filter { it.isNotEmpty() }
                 .map { it.split("|") }
                 .filterNot { historyItem ->
-                    historyItem.size == 3 &&
                             historyItem[0] == itemToRemove.title &&
                             historyItem[1] == itemToRemove.notes &&
-                            historyItem[2] == itemToRemove.code
+                            historyItem[2] == itemToRemove.code &&
+                            historyItem[3] == itemToRemove.date
                 }.joinToString(";;") { it.joinToString("|") } + ";;"
 
             preferences[PreferencesKeys.HISTORY] = updatedHistory
