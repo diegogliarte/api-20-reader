@@ -18,12 +18,15 @@ import com.example.api20_detector.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.UUID
+import kotlin.properties.Delegates
 
 class ManualAnalysisActivity : AppCompatActivity() {
     private lateinit var analysis: MicrotubeAnalysis
     private lateinit var currentInstance: API20Instance
     private val microtubeIndexMap = mutableMapOf<Int, Int>()
     private lateinit var analysisHistoryManager: AnalysisHistoryManager
+    private lateinit var historyUUID: String
 
     private lateinit var titleInput: EditText
     private lateinit var notesInput: EditText
@@ -57,6 +60,7 @@ class ManualAnalysisActivity : AppCompatActivity() {
         initializeMicrotubeIndexMap()
         setupAnalysisInstance()
         handleReceivedColors()
+        historyUUID = intent.getStringExtra("historyUUID") ?: UUID.randomUUID().toString()
     }
 
     private fun setupUIInteractions() {
@@ -138,7 +142,7 @@ class ManualAnalysisActivity : AppCompatActivity() {
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                analysisHistoryManager.saveAnalysisHistory(title, notes, code)
+                analysisHistoryManager.saveAnalysisHistory(historyUUID, title, notes, code)
                 launch(Dispatchers.Main) {
                     Toast.makeText(this@ManualAnalysisActivity, "History saved successfully!", Toast.LENGTH_SHORT).show()
                 }

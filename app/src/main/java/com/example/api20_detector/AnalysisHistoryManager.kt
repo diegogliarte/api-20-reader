@@ -21,18 +21,31 @@ class AnalysisHistoryManager(private val context: Context) {
         val HISTORY = stringPreferencesKey("history")
     }
 
-    suspend fun saveAnalysisHistory(title: String, notes: String, code: String) {
+    suspend fun saveAnalysisHistory(historyUUID: String, title: String, notes: String, code: String) {
         // Format the current date and time for lower API levels
         val calendar = Calendar.getInstance()
         val formatter = SimpleDateFormat("yyyy/MM/dd HH:mm", Locale.getDefault())
         val formattedDateTime = formatter.format(calendar.time)
 
         // Construct historyData with date appended
-        val historyData = "$title|$notes|$code|$formattedDateTime"
+        val newHistoryData = "$historyUUID|$title|$notes|$code|$formattedDateTime"
 
         context.dataStore.edit { preferences ->
-            val currentHistory = preferences[PreferencesKeys.HISTORY] ?: ""
-            preferences[PreferencesKeys.HISTORY] = currentHistory + historyData + ";;"
+            val existingHistory = preferences[PreferencesKeys.HISTORY] ?: ""
+            val historyEntries = existingHistory.split(";;").toMutableList()
+
+            // Find the index of the existing entry by UUID
+            val existingIndex = historyEntries.indexOfFirst { it.startsWith("$historyUUID|") }
+
+            if (existingIndex != -1) {
+                // Replace the existing entry with the new data
+                historyEntries[existingIndex] = newHistoryData
+            } else {
+                // Append the new history data
+                historyEntries.add(newHistoryData)
+            }
+
+            preferences[PreferencesKeys.HISTORY] = historyEntries.joinToString(";;")
         }
     }
 
@@ -44,10 +57,7 @@ class AnalysisHistoryManager(private val context: Context) {
                 .filter { it.isNotEmpty() }
                 .map { it.split("|") }
                 .filterNot { historyItem ->
-                            historyItem[0] == itemToRemove.title &&
-                            historyItem[1] == itemToRemove.notes &&
-                            historyItem[2] == itemToRemove.code &&
-                            historyItem[3] == itemToRemove.date
+                            historyItem[0] == itemToRemove.id
                 }.joinToString(";;") { it.joinToString("|") } + ";;"
 
             preferences[PreferencesKeys.HISTORY] = updatedHistory
