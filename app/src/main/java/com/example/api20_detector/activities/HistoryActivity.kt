@@ -63,16 +63,16 @@ class HistoryActivity : AppCompatActivity() {
 
     private fun showDeletionConfirmationDialog(historyItem: HistoryItem) {
         AlertDialog.Builder(this)
-            .setTitle("Delete History")
-            .setMessage("Are you sure you want to delete this history item?")
-            .setPositiveButton("Delete") { dialog, which ->
+            .setTitle(getString(R.string.delete_history_dialog_title))
+            .setMessage(getString(R.string.delete_history_dialog_message))
+            .setPositiveButton(getString(R.string.delete_history_dialog_positive)) { dialog, which ->
                 // Delete the item and reload history
                 CoroutineScope(Dispatchers.IO).launch {
                     analysisHistoryManager.removeAnalysisHistory(historyItem)
                     loadHistory() // Make sure this method correctly updates the adapter on the UI thread
                 }
             }
-            .setNegativeButton("Cancel", null) // Dismiss dialog without action
+            .setNegativeButton(getString(R.string.delete_history_dialog_negative), null) // Dismiss dialog without action
             .show()
     }
 

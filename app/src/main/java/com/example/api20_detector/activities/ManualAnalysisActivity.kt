@@ -144,11 +144,11 @@ class ManualAnalysisActivity : AppCompatActivity() {
             try {
                 analysisHistoryManager.saveAnalysisHistory(historyUUID, title, notes, code)
                 launch(Dispatchers.Main) {
-                    Toast.makeText(this@ManualAnalysisActivity, "History saved successfully!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@ManualAnalysisActivity, getString(R.string.save_history_toast_success), Toast.LENGTH_SHORT).show()
                 }
             } catch (e: Exception) {
                 launch(Dispatchers.Main) {
-                    Toast.makeText(this@ManualAnalysisActivity, "Failed to save history: ${e.message}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@ManualAnalysisActivity, getString(R.string.save_history_toast_fail, e.toString()), Toast.LENGTH_LONG).show()
                 }
             }
         }

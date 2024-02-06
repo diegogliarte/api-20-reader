@@ -1,16 +1,7 @@
 import com.example.api20_detector.Microtube
 import com.example.api20_detector.MicrotubeColor
 
-class API20Instance(val name: String, val microtubes: Map<Int, Microtube>) {
-    fun getScore(microtubeIndex: Int, detectedColor: MicrotubeColor): Int {
-        val microtube = microtubes[microtubeIndex] ?: return 0
-        return when {
-            detectedColor in microtube.positiveColors -> microtube.index
-            detectedColor in microtube.negativeColors -> -1
-            else -> 0
-        }
-    }
-}
+class API20Instance(val name: String, val microtubes: Map<Int, Microtube>);
 
 
 object API20Factory {

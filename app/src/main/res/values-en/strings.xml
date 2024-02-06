@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">API 20 Detector</string>
+    <string name="camera">Camera</string>
+    <string name="manual">Manual</string>
+    <string name="view_history">View History</string>
+
+    <string name="move_image">Move image</string>
+    <string name="manual_title">Manual Analysis</string>
+    <string name="analyzing_strips">Analyzing strips, wait…</string>
+    <string name="strips_1_10">Strips 1 – 10</string>
+    <string name="strips_11_20">Strips 11 – 20</string>
+
+    <string name="tap_to_change_color">Tap to change color</string>
+    <string name="strips_1_3">Strips 1 – 3</string>
+    <string name="strips_4_6">Strips 4 – 6</string>
+    <string name="strips_7_9">Strips 7 – 9</string>
+    <string name="strips_10_12">Strips 10 – 12</string>
+    <string name="strips_13_15">Strips 13 – 15</string>
+    <string name="strips_16_18">Strips 16 – 18</string>
+    <string name="strips_19_21">Strips 19 – 21</string>
+
+    <string name="delete_history_dialog_title">Delete History</string>
+    <string name="delete_history_dialog_message">Are you sure you want to delete this history item?</string>
+    <string name="delete_history_dialog_positive">Delete</string>
+    <string name="delete_history_dialog_negative">Cancel</string>
+
+    <string name="save_history_toast_success">History saved successfully!</string>
+    <string name="save_history_toast_fail">Failed to save history: %1$s</string>
+
+    <string name="save_history_title">Title</string>
+    <string name="save_history_notes">Notes</string>
+    <string name="save_history_button">Save History</string>
+</resources>

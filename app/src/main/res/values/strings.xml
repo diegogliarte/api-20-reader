@@ -1,3 +1,33 @@
 <resources>
     <string name="app_name">API 20 Detector</string>
+    <string name="camera">Cámara</string>
+    <string name="manual">Manual</string>
+    <string name="view_history">Ver Historial</string>
+
+    <string name="move_image">Mueve la imágen</string>
+    <string name="manual_title">Análisis Manual</string>
+    <string name="analyzing_strips">Analizando pocillos, espere…</string>
+    <string name="strips_1_10">Pocillos 1 – 10</string>
+    <string name="strips_11_20">Pocillos 11 – 20</string>
+
+    <string name="tap_to_change_color">Toca para cambiar de color</string>
+    <string name="strips_1_3">Pocillos 1 – 3</string>
+    <string name="strips_4_6">Pocillos 4 – 6</string>
+    <string name="strips_7_9">Pocillos 7 – 9</string>
+    <string name="strips_10_12">Pocillos 10 – 12</string>
+    <string name="strips_13_15">Pocillos 13 – 15</string>
+    <string name="strips_16_18">Pocillos 16 – 18</string>
+    <string name="strips_19_21">Pocillos 19 – 21</string>
+
+    <string name="delete_history_dialog_title">Eliminar del historial</string>
+    <string name="delete_history_dialog_message">¿Estás seguro que deseas eliminar este elemento?</string>
+    <string name="delete_history_dialog_positive">Eliminar</string>
+    <string name="delete_history_dialog_negative">Cancelar</string>
+
+    <string name="save_history_toast_success">¡Entrada guardada!</string>
+    <string name="save_history_toast_fail">No se ha podido guardar: %1$s</string>
+
+    <string name="save_history_title">Título</string>
+    <string name="save_history_notes">Notas</string>
+    <string name="save_history_button">Guardar en historial</string>
 </resources>

@@ -77,7 +77,7 @@ class CameraAnalysisActivity : CameraActivity() {
     private fun startAnalysis(frame: Mat) {
         isAnalysing = true
         cameraViewListener.setFrameForAnalysis(frame)
-        textView.text = "Move the image"
+        textView.setText(R.string.move_image)
     }
 
     private fun finishFirstAnalysis(frame: Mat) {
@@ -88,11 +88,11 @@ class CameraAnalysisActivity : CameraActivity() {
         isFirstSetAnalyzed = true
         isAnalysing = false
         cameraViewListener.setFrameForAnalysis(null)
-        textView.text = "Microtubes 11 - 20"
+        textView.setText(R.string.strips_11_20)
     }
 
     private fun finishAnalysis(frame: Mat) {
-        textView.text = "Analyzing microtubes, wait..."
+        textView.setText(R.string.analyzing_strips)
         val microtubesRegions = drawer.getMicrotubesRegions(frame.width(), frame.height())
         val analyzedColors = colorAnalyzer.analyzeMicrotubes(frame, microtubesRegions)
         allMicrotubesColors.addAll(analyzedColors)
