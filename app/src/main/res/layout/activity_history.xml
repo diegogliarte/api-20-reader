@@ -5,6 +5,16 @@
     android:orientation="vertical"
     android:background="@color/primary_0">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/Toolbar"
+        app:title="@string/history_title"
+        app:titleTextColor="@color/primary_0"
+        >
+
+
+    </androidx.appcompat.widget.Toolbar>
+
     <androidx.appcompat.widget.SearchView
         android:id="@+id/search_view"
         android:layout_width="match_parent"

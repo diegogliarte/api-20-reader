@@ -19,6 +19,7 @@
     <string name="strips_16_18">Strips 16 – 18</string>
     <string name="strips_19_21">Strips 19 – 21</string>
 
+    <string name="history_title">History</string>
     <string name="delete_history_dialog_title">Delete History</string>
     <string name="delete_history_dialog_message">Are you sure you want to delete this history item?</string>
     <string name="delete_history_dialog_positive">Delete</string>

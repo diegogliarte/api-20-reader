@@ -9,7 +9,7 @@
         android:id="@+id/delete_button"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:background="@drawable/back_arrow"
+        android:background="@drawable/delete_button"
         android:backgroundTint="@color/red"
         android:scaleType="fitCenter"
         android:layout_alignParentEnd="true"

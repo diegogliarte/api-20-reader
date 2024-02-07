@@ -67,4 +67,16 @@
         <item name="android:textSize">20sp</item>
     </style>
 
+    <style name="Toolbar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:background">@color/primary_4</item>
+        <item name="android:elevation">4dp</item>
+        <item name="android:navigationIcon">@drawable/back_arrow</item>
+        <item name="android:textColor">@color/primary_0</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Large</item>
+        <item name="android:color">@color/primary_0</item>
+    </style>
+
 </resources>

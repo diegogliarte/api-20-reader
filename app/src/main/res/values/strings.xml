@@ -19,6 +19,7 @@
     <string name="strips_16_18">Pocillos 16 – 18</string>
     <string name="strips_19_21">Pocillos 19 – 21</string>
 
+    <string name="history_title">Historial</string>
     <string name="delete_history_dialog_title">Eliminar del historial</string>
     <string name="delete_history_dialog_message">¿Estás seguro que deseas eliminar este elemento?</string>
     <string name="delete_history_dialog_positive">Eliminar</string>
