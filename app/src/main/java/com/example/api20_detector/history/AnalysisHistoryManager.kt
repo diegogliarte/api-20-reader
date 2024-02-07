@@ -40,6 +40,10 @@ class AnalysisHistoryManager(private val context: Context) {
         return historyItemDao.getAllHistoryItems()
     }
 
+    fun searchHistoryItems(query: String): LiveData<List<HistoryItem>> {
+        return historyItemDao.searchHistoryItems(query)
+    }
+
     companion object {
         @Volatile
         private var INSTANCE: AnalysisHistoryManager? = null

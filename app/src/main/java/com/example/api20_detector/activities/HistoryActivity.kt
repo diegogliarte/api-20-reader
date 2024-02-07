@@ -1,8 +1,10 @@
 package com.example.api20_detector.activities
 
 import android.os.Bundle
+import android.view.Menu
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,15 +19,44 @@ import kotlinx.coroutines.withContext
 
 class HistoryActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
-    private lateinit var viewAdapter: RecyclerView.Adapter<*>
+    private lateinit var searchView: SearchView
     private lateinit var analysisHistoryManager: AnalysisHistoryManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_history)
 
+        searchView = findViewById<SearchView>(R.id.search_view)
+
         analysisHistoryManager = AnalysisHistoryManager.getInstance(this)
         setupRecyclerView()
+        setupSearchView()
+    }
+
+    private fun setupSearchView() {
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let { performSearch(it) }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                newText?.let { performSearch(it) }
+                return false // Return true if the SearchView should perform the default action of showing suggestions.
+            }
+        })
+    }
+
+    private fun performSearch(query: String) {
+        val searchQuery = "%$query%"
+        // Assuming AnalysisHistoryManager has been updated to include a search method
+        // that returns LiveData<List<HistoryItem>>.
+        analysisHistoryManager.searchHistoryItems(searchQuery).observe(this, Observer { historyItems ->
+            // Update the RecyclerView adapter with the search results.
+            recyclerView.adapter = HistoryAdapter(historyItems) { historyItem ->
+                showDeletionConfirmationDialog(historyItem)
+            }
+        })
     }
 
     private fun setupRecyclerView() {

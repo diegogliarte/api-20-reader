@@ -29,5 +29,12 @@ interface HistoryItemDao {
 
     @Delete
     suspend fun deleteHistoryItem(historyItem: HistoryItem)
+
+    @Query("SELECT * FROM history_items " +
+            "WHERE title LIKE :query OR " +
+            "notes LIKE :query OR " +
+            "code LIKE :query")
+    fun searchHistoryItems(query: String): LiveData<List<HistoryItem>>
+
 }
 
