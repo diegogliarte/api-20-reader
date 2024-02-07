@@ -57,7 +57,7 @@ class Drawer {
 
     private fun cutTransparentHoles(mask: Mat, regions: List<Pair<Point, Point>>) {
         val transparent = Scalar(0.0, 0.0, 0.0, 0.0)
-1
+        1
         for ((topLeft, bottomRight) in regions) {
             Imgproc.rectangle(mask, topLeft, bottomRight, transparent, -1)
         }
@@ -170,7 +170,7 @@ class Drawer {
 
         for (i in 1..10) {
             val topLeft = Point(currentX + microtubeWidth / 3, topY + microtubeHeight / 2)
-            val bottomRight = Point(currentX + microtubeWidth -  microtubeWidth / 3, bottomY - 20)
+            val bottomRight = Point(currentX + microtubeWidth - microtubeWidth / 3, bottomY - 20)
             regions.add(Pair(topLeft, bottomRight))
             currentX += microtubeWidth + spaceBetweenMicrotubes
         }

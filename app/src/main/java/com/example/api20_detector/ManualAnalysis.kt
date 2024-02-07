@@ -1,5 +1,3 @@
-import android.util.Log
-import com.example.api20_detector.Microtube
 import com.example.api20_detector.MicrotubeColor
 import com.example.api20_detector.R
 

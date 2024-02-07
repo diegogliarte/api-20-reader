@@ -1,5 +1,6 @@
 package com.example.api20_detector.activities
 
+import API20Factory
 import API20Instance
 import MicrotubeAnalysis
 import android.os.Bundle
@@ -9,7 +10,6 @@ import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
-import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.api20_detector.AnalysisHistoryManager
@@ -19,7 +19,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.UUID
-import kotlin.properties.Delegates
 
 class ManualAnalysisActivity : AppCompatActivity() {
     private lateinit var analysis: MicrotubeAnalysis
@@ -95,7 +94,8 @@ class ManualAnalysisActivity : AppCompatActivity() {
             val colorNames = intent.getStringArrayListExtra("microtube${i}Colors") ?: continue
 
             val microtube = currentInstance.microtubes[i + 1]
-            val allowedColors = microtube?.positiveColors.orEmpty() + microtube?.negativeColors.orEmpty()
+            val allowedColors =
+                microtube?.positiveColors.orEmpty() + microtube?.negativeColors.orEmpty()
             val allowedColorNames = allowedColors.map { it.name }
 
             val bestColorName = colorNames
@@ -118,7 +118,8 @@ class ManualAnalysisActivity : AppCompatActivity() {
         val microtubeView = findViewById<View>(microtubeId)
 
         val frameLayout = microtubeView.parent as? FrameLayout
-        val signTextViewId = resources.getIdentifier("signTextView$microtubeIndex", "id", packageName)
+        val signTextViewId =
+            resources.getIdentifier("signTextView$microtubeIndex", "id", packageName)
         val signTextView = frameLayout?.findViewById<TextView>(signTextViewId)
 
         if (actualColor == MicrotubeColor.WHITE) {
@@ -129,7 +130,10 @@ class ManualAnalysisActivity : AppCompatActivity() {
             microtubeView.backgroundTintList = ContextCompat.getColorStateList(this, newColor)
         }
 
-        signTextView?.text = if (actualColor in (currentInstance.microtubes[microtubeIndex]?.positiveColors ?: emptySet())) "+" else "−"
+        signTextView?.text =
+            if (actualColor in (currentInstance.microtubes[microtubeIndex]?.positiveColors
+                    ?: emptySet())
+            ) "+" else "−"
         currentInstance.microtubes[microtubeIndex]?.currentColor = actualColor
 
         updateCodeTextView()
@@ -144,11 +148,19 @@ class ManualAnalysisActivity : AppCompatActivity() {
             try {
                 analysisHistoryManager.saveAnalysisHistory(historyUUID, title, notes, code)
                 launch(Dispatchers.Main) {
-                    Toast.makeText(this@ManualAnalysisActivity, getString(R.string.save_history_toast_success), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this@ManualAnalysisActivity,
+                        getString(R.string.save_history_toast_success),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             } catch (e: Exception) {
                 launch(Dispatchers.Main) {
-                    Toast.makeText(this@ManualAnalysisActivity, getString(R.string.save_history_toast_fail, e.toString()), Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        this@ManualAnalysisActivity,
+                        getString(R.string.save_history_toast_fail, e.toString()),
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             }
         }

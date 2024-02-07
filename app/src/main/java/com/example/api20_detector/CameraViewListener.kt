@@ -1,12 +1,13 @@
 package com.example.api20_detector
 
-import android.util.Log
 import org.opencv.android.CameraBridgeViewBase
 import org.opencv.core.Mat
 
 class CameraViewListener(private val drawer: Drawer) : CameraBridgeViewBase.CvCameraViewListener2 {
-    @Volatile private var latestFrame: Mat? = null
-    @Volatile private var frameForAnalysis: Mat? = null
+    @Volatile
+    private var latestFrame: Mat? = null
+    @Volatile
+    private var frameForAnalysis: Mat? = null
 
     fun getLatestFrame(): Mat? = synchronized(this) {
         return latestFrame

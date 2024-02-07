@@ -10,7 +10,8 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun historyItemDao(): HistoryItemDao
 
     companion object {
-        @Volatile private var instance: AppDatabase? = null
+        @Volatile
+        private var instance: AppDatabase? = null
 
         fun getDatabase(context: Context): AppDatabase =
             instance ?: synchronized(this) {

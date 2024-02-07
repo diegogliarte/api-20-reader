@@ -71,7 +71,7 @@ class CameraAnalysisActivity : CameraActivity() {
             }
         }
 
-        gestureHandler?.setIsAnalysing(isAnalysing);
+        gestureHandler?.setIsAnalysing(isAnalysing)
     }
 
     private fun startAnalysis(frame: Mat) {

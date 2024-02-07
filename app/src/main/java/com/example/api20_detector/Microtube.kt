@@ -15,7 +15,6 @@ enum class MicrotubeColor(val displayName: String) {
 }
 
 
-
 class Microtube(
     val index: Int,
     val positiveColors: List<MicrotubeColor>,

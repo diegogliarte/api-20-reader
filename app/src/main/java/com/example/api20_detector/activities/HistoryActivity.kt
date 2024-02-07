@@ -1,7 +1,6 @@
 package com.example.api20_detector.activities
 
 import android.os.Bundle
-import android.view.Menu
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
@@ -15,7 +14,6 @@ import com.example.api20_detector.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class HistoryActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
@@ -51,12 +49,13 @@ class HistoryActivity : AppCompatActivity() {
         val searchQuery = "%$query%"
         // Assuming AnalysisHistoryManager has been updated to include a search method
         // that returns LiveData<List<HistoryItem>>.
-        analysisHistoryManager.searchHistoryItems(searchQuery).observe(this, Observer { historyItems ->
-            // Update the RecyclerView adapter with the search results.
-            recyclerView.adapter = HistoryAdapter(historyItems) { historyItem ->
-                showDeletionConfirmationDialog(historyItem)
-            }
-        })
+        analysisHistoryManager.searchHistoryItems(searchQuery)
+            .observe(this, Observer { historyItems ->
+                // Update the RecyclerView adapter with the search results.
+                recyclerView.adapter = HistoryAdapter(historyItems) { historyItem ->
+                    showDeletionConfirmationDialog(historyItem)
+                }
+            })
     }
 
     private fun setupRecyclerView() {
@@ -82,7 +81,10 @@ class HistoryActivity : AppCompatActivity() {
                     analysisHistoryManager.removeAnalysisHistory(historyItem)
                 }
             }
-            .setNegativeButton(getString(R.string.delete_history_dialog_negative), null) // Dismiss dialog without action
+            .setNegativeButton(
+                getString(R.string.delete_history_dialog_negative),
+                null
+            ) // Dismiss dialog without action
             .show()
     }
 }
