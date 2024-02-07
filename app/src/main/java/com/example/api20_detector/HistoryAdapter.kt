@@ -7,8 +7,6 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-data class HistoryItem(val id: String, val title: String, val notes: String, val code: String, val date: String)
-
 class HistoryAdapter(private val historyList: List<HistoryItem>, val onDeleteClick: (HistoryItem) -> Unit) : RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
