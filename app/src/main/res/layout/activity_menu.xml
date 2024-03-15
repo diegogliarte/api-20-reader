@@ -3,8 +3,7 @@
     android:layout_height="match_parent"
     android:background="@color/primary_0"
     android:gravity="center"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
 
     <LinearLayout
@@ -13,8 +12,7 @@
         android:background="@drawable/rounded_green_container"
         android:gravity="center"
         android:orientation="vertical"
-        android:padding="32dp"
-        >
+        android:padding="32dp">
 
 
         <LinearLayout
@@ -79,8 +77,8 @@
         <!-- Manual Mode Button and Label -->
         <LinearLayout
             android:id="@+id/manualModeSelector"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_marginTop="16dp"
             android:background="@drawable/button_selector"
             android:gravity="center"
@@ -106,22 +104,27 @@
 
         <LinearLayout
             android:id="@+id/historySelector"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:clickable="true"
-            android:focusable="true"
-            android:padding="16dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/button_selector"
-        >
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingLeft="64dp"
+            android:paddingRight="64dp"
+            android:paddingBottom="24dp"
+            android:paddingTop="24dp"
+            >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/view_history"
-        />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/view_history"
+                android:textColor="@color/primary_4"
+                android:gravity="center"
+                android:textSize="24sp" />
 
-    </LinearLayout>
+        </LinearLayout>
 
     </LinearLayout>
 </LinearLayout>

@@ -2,7 +2,7 @@
     <string name="app_name">API 20 Detector</string>
     <string name="camera">Camera</string>
     <string name="manual">Manual</string>
-    <string name="view_history">View History</string>
+    <string name="view_history">History</string>
 
     <string name="move_image">Move image</string>
     <string name="manual_title">Manual Analysis</string>
