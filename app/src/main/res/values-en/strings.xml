@@ -18,6 +18,8 @@
     <string name="strips_13_15">Strips 13 – 15</string>
     <string name="strips_16_18">Strips 16 – 18</string>
     <string name="strips_19_21">Strips 19 – 21</string>
+    <string name="strips_22_24">Strips 22 – 24</string>
+    <string name="strips_25_27">Strips 25 – 27</string>
 
     <string name="history_title">History</string>
     <string name="delete_history_dialog_title">Delete History</string>
@@ -30,5 +32,7 @@
 
     <string name="save_history_title">Title</string>
     <string name="save_history_notes">Notes</string>
-    <string name="save_history_button">Save History</string>
+    <string name="save_history_button">Save</string>
+    <string name="add_extra_tests">Add extra</string>
+    <string name="remove_extra_tests">Remove extra</string>
 </resources>

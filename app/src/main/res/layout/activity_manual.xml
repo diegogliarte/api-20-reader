@@ -6,16 +6,13 @@
     android:layout_height="match_parent"
     android:background="@color/primary_0"
     android:gravity="center"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         style="@style/Toolbar"
         app:title="@string/manual_title"
-        app:titleTextColor="@color/primary_0"
-        >
-    </androidx.appcompat.widget.Toolbar>
+        app:titleTextColor="@color/primary_0"></androidx.appcompat.widget.Toolbar>
 
 
     <ScrollView
@@ -625,6 +622,216 @@
                     android:text="OXI" />
             </LinearLayout>
 
+
+            <Button
+                android:id="@+id/add_extra"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="32dp"
+                android:background="@drawable/rounded_green_container"
+                android:gravity="center"
+                android:text="@string/add_extra_tests"
+                android:textColor="@color/primary_0"
+                android:textSize="24sp"
+                android:onClick="toggleExtra"
+                android:padding="16dp"
+                />
+
+
+            <LinearLayout
+                android:id="@+id/extraTestsContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <!-- Microtubes 22 - 24 -->
+
+                <TextView
+                    style="@style/TitleTripletMicrotubes"
+                    android:text="@string/strips_22_24" />
+
+                <LinearLayout style="@style/TripletMicrotubesContainer">
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:id="@+id/microtube22"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/microtube_extra"
+                            android:onClick="onMicrotubeClick" />
+
+                        <TextView
+                            android:id="@+id/signTextView22"
+                            style="@style/SignTextViewStyle" />
+
+                        <TextView
+                            android:id="@+id/numberTextView22"
+                            style="@style/NumberTextViewStyle"
+                            android:text="1" />
+                    </FrameLayout>
+
+                    <Space style="@style/TripletsSpace" />
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:id="@+id/microtube23"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/microtube_extra"
+                            android:onClick="onMicrotubeClick" />
+
+                        <TextView
+                            android:id="@+id/signTextView23"
+                            style="@style/SignTextViewStyle" />
+
+                        <TextView
+                            android:id="@+id/numberTextView23"
+                            style="@style/NumberTextViewStyle"
+                            android:text="2" />
+                    </FrameLayout>
+
+                    <Space style="@style/TripletsSpace" />
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:id="@+id/microtube24"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/microtube_extra"
+                            android:onClick="onMicrotubeClick" />
+
+                        <TextView
+                            android:id="@+id/signTextView24"
+                            style="@style/SignTextViewStyle" />
+
+                        <TextView
+                            android:id="@+id/numberTextView24"
+                            style="@style/NumberTextViewStyle"
+                            android:text="4" />
+                    </FrameLayout>
+
+                </LinearLayout>
+
+                <LinearLayout style="@style/TripletsTextContainer">
+
+                    <TextView
+                        style="@style/TripletsTextName"
+                        android:text="NO2" />
+
+                    <TextView
+                        style="@style/TripletsTextName"
+                        android:text="N2" />
+
+                    <TextView
+                        style="@style/TripletsTextName"
+                        android:text="MOB" />
+                </LinearLayout>
+
+                <!-- Microtubes 25 - 27 -->
+                <TextView
+                    style="@style/TitleTripletMicrotubes"
+                    android:text="@string/strips_25_27" />
+
+                <LinearLayout style="@style/TripletMicrotubesContainer">
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:id="@+id/microtube25"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/microtube_extra"
+                            android:onClick="onMicrotubeClick" />
+
+                        <TextView
+                            android:id="@+id/signTextView25"
+                            style="@style/SignTextViewStyle" />
+
+                        <TextView
+                            android:id="@+id/numberTextView25"
+                            style="@style/NumberTextViewStyle"
+                            android:text="1" />
+                    </FrameLayout>
+
+                    <Space style="@style/TripletsSpace" />
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:id="@+id/microtube26"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/microtube_extra"
+                            android:onClick="onMicrotubeClick" />
+
+                        <TextView
+                            android:id="@+id/signTextView26"
+                            style="@style/SignTextViewStyle" />
+
+                        <TextView
+                            android:id="@+id/numberTextView26"
+                            style="@style/NumberTextViewStyle"
+                            android:text="2" />
+                    </FrameLayout>
+
+                    <Space style="@style/TripletsSpace" />
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:id="@+id/microtube27"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/microtube_extra"
+                            android:onClick="onMicrotubeClick" />
+
+                        <TextView
+                            android:id="@+id/signTextView27"
+                            style="@style/SignTextViewStyle" />
+
+                        <TextView
+                            android:id="@+id/numberTextView27"
+                            style="@style/NumberTextViewStyle"
+                            android:text="4" />
+                    </FrameLayout>
+
+                </LinearLayout>
+
+                <LinearLayout style="@style/TripletsTextContainer">
+
+                    <TextView
+                        style="@style/TripletsTextName"
+                        android:text="McC" />
+
+                    <TextView
+                        style="@style/TripletsTextName"
+                        android:text="OF/O" />
+
+                    <TextView
+                        style="@style/TripletsTextName"
+                        android:text="OF/F" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+
             <TextView
                 android:id="@+id/code"
                 android:layout_width="match_parent"
@@ -637,36 +844,34 @@
                 android:textColor="@color/primary_0"
                 android:textSize="32sp" />
 
-
             <EditText
                 android:id="@+id/titleInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/save_history_title"
-                android:nextFocusDown="@+id/notesInput"
                 android:backgroundTint="@color/primary_2"
-                />
+                android:hint="@string/save_history_title"
+                android:nextFocusDown="@+id/notesInput" />
 
             <EditText
                 android:id="@+id/notesInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/save_history_notes"
-                android:nextFocusDown="@+id/saveButton"
                 android:backgroundTint="@color/primary_2"
-                />
+                android:hint="@string/save_history_notes"
+                android:nextFocusDown="@+id/saveButton" />
 
             <Button
                 android:id="@+id/saveButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="saveHistory"
-                android:text="@string/save_history_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:textColor="@color/primary_4"
-                android:background="@drawable/rounded_green_container_with_green_border_container"
-                android:padding="12dp"
                 android:layout_margin="16dp"
+                android:background="@drawable/rounded_green_container"
+                android:onClick="saveHistory"
+                android:padding="16dp"
+                android:text="@string/save_history_button"
+                android:textColor="@color/primary_0"
+                android:textSize="24sp"
                 />
         </LinearLayout>
     </ScrollView>

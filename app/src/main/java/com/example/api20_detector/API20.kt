@@ -76,7 +76,13 @@ object API20Factory {
                     listOf(MicrotubeColor.BLUE, MicrotubeColor.GREEN)
                 ),
 
-                21 to Microtube(21, listOf(MicrotubeColor.GREEN), listOf(MicrotubeColor.RED))
+                21 to Microtube(21, listOf(MicrotubeColor.GREEN), listOf(MicrotubeColor.RED)),
+                22 to Microtube(22, listOf(MicrotubeColor.GREEN), listOf(MicrotubeColor.RED)),
+                23 to Microtube(23, listOf(MicrotubeColor.GREEN), listOf(MicrotubeColor.RED)),
+                24 to Microtube(24, listOf(MicrotubeColor.GREEN), listOf(MicrotubeColor.RED)),
+                25 to Microtube(25, listOf(MicrotubeColor.GREEN), listOf(MicrotubeColor.RED)),
+                26 to Microtube(26, listOf(MicrotubeColor.GREEN), listOf(MicrotubeColor.RED)),
+                27 to Microtube(27, listOf(MicrotubeColor.GREEN), listOf(MicrotubeColor.RED)),
             )
         )
     }

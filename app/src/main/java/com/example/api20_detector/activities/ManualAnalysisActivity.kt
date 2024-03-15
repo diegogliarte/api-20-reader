@@ -4,6 +4,7 @@ import API20Factory
 import API20Instance
 import MicrotubeAnalysis
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -72,7 +73,7 @@ class ManualAnalysisActivity : AppCompatActivity() {
 
 
     private fun initializeMicrotubeIndexMap() {
-        for (i in 1..21) {
+        for (i in 1..27) {
             val idName = "microtube$i"
             val resId = resources.getIdentifier(idName, "id", packageName)
             if (resId != 0) {
@@ -171,7 +172,13 @@ class ManualAnalysisActivity : AppCompatActivity() {
         val codeTextView = findViewById<TextView>(R.id.code)
         val code = StringBuilder()
 
-        for (i in 1..21 step 3) {
+        var microtubesLength = 21
+
+        if (findViewById<View>(R.id.extraTestsContainer).visibility == View.VISIBLE) {
+            microtubesLength = 27
+        }
+
+        for (i in 1..microtubesLength step 3) {
             var sum = 0
             for (j in 0..2) {
                 val microtubeIndex = i + j
@@ -180,7 +187,11 @@ class ManualAnalysisActivity : AppCompatActivity() {
                     sum += getNumberForMicrotube(microtubeIndex)
                 }
             }
-            code.append(sum)
+
+            if (i == 22 && microtubesLength == 27) {
+                code.append("-")
+            }
+            code.append(sum.toString())
         }
 
         codeTextView.text = code.toString()
@@ -198,6 +209,12 @@ class ManualAnalysisActivity : AppCompatActivity() {
     fun onMicrotubeClick(view: View) {
         val microtubeIndex = microtubeIndexMap[view.id] ?: return
         handleMicrotubeUpdate(microtubeIndex)
+    }
+
+    fun toggleExtra(view: View) {
+        val extraLayout = findViewById<View>(R.id.extraTestsContainer)
+        extraLayout.visibility = if (extraLayout.visibility == View.VISIBLE) View.GONE else View.VISIBLE
+        updateCodeTextView()
     }
 
     private fun hideSoftKeyboard() {

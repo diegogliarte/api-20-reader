@@ -18,6 +18,8 @@
     <string name="strips_13_15">Pocillos 13 – 15</string>
     <string name="strips_16_18">Pocillos 16 – 18</string>
     <string name="strips_19_21">Pocillos 19 – 21</string>
+    <string name="strips_22_24">Pocillos 22 – 24</string>
+    <string name="strips_25_27">Pocillos 25 – 27</string>
 
     <string name="history_title">Historial</string>
     <string name="delete_history_dialog_title">Eliminar del historial</string>
@@ -30,5 +32,7 @@
 
     <string name="save_history_title">Título</string>
     <string name="save_history_notes">Notas</string>
-    <string name="save_history_button">Guardar en historial</string>
+    <string name="save_history_button">Guardar</string>
+    <string name="add_extra_tests">Añadir extra</string>
+    <string name="remove_extra_tests">Eliminar extra</string>
 </resources>
